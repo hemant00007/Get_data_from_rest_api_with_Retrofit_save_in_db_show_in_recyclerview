@@ -8,6 +8,6 @@ import retrofit2.http.Header;
 
 public interface Restinteface {
 
-    @GET("menu.php")
-    Call<List<Repo>> savedata();
+    @GET("unknown")
+    Call<MyModel> savedata();
 }

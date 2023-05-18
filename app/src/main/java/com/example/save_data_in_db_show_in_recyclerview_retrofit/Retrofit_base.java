@@ -15,7 +15,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Retrofit_base {
-    public static final String BASE_URL = "https://api.androidhive.info/json/shimmer/";
+    public static final String BASE_URL = "https://reqres.in/api/";
     public static Retrofit retrofit = null;
     public  static Context context;
 

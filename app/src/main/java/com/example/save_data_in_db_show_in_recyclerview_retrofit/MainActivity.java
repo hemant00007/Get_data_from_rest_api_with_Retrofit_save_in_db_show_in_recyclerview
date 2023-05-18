@@ -23,10 +23,10 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerview;
-    private List<Repo> arrayList;
+    private List<Data> arrayList;
     private CustomRecyclerview adapter;
     private ProgressBar pb;
-   List<Repo> recipes;
+   List<Data> recipes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,12 +64,11 @@ public class MainActivity extends AppCompatActivity {
                 List<Recipe> recipeList = DatabaseClient.getInstance(MainActivity.this).getAppDatabase().recipeDao().getAll();
                 arrayList.clear();
                 for (Recipe recipe: recipeList) {
-                    Repo repo = new Repo(recipe.getId(),             recipe.getName(),
-                            recipe.getDescription(),
-                            recipe.getPrice(),
-                            recipe.getThumbnail(),
-                            recipe.getChef(),
-                            recipe.getTimestamp());
+                    Data repo = new Data(recipe.getId(),
+                            recipe.getName(),
+                            recipe.getYear(),
+                            recipe.getColor(),
+                            recipe.getPantone());
                     arrayList.add(repo);
                 }
 
@@ -88,12 +87,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void call_restapi() {
         Restinteface restinteface =Retrofit_base.getCacheEnabledRetrofit(this).create(Restinteface.class);
-        Call<List<Repo>> call = restinteface.savedata();
-        call.enqueue(new Callback<List<Repo>>() {
+        Call<MyModel> call = restinteface.savedata();
+        call.enqueue(new Callback<MyModel>() {
             @Override
-            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
-                arrayList=response.body();
-                recipes=response.body();
+            public void onResponse(Call<MyModel> call, Response<MyModel> response) {
+                arrayList=response.body().getData();
+               recipes=response.body().getData();
                 recyclerview.setAdapter(new CustomRecyclerview(MainActivity.this,arrayList));
 
                 saveTask();
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Repo>> call, Throwable t) {
+            public void onFailure(Call<MyModel> call, Throwable t) {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
@@ -119,11 +118,11 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < recipes.size(); i++) {
                     Recipe recipe= new  Recipe();
                     recipe.setName(recipes.get(i).getName());
-                    recipe.setDescription(recipes.get(i).getDescription());
-                    recipe.setPrice(recipes.get(i).getPrice());
-                    recipe.setThumbnail(recipes.get(i).getThumbnail());
-                    recipe.setChef(recipes.get(i).getChef());
-                    recipe.setTimestamp(recipes.get(i).getTimestamp());
+                    recipe.setYear(recipes.get(i).getYear());
+                    recipe.setColor(recipes.get(i).getColor());
+                    recipe.setPantone(recipes.get(i).getPantoneValue());
+                    recipe.setPantone(recipes.get(i).getPantoneValue());
+
                     DatabaseClient.getInstance(getApplicationContext()).getAppDatabase().recipeDao().insert(recipe);
                 }
 

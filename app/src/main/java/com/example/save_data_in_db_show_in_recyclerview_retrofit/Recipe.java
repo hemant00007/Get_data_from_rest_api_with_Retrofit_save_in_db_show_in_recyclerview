@@ -10,25 +10,18 @@ public class Recipe implements Serializable {
     @PrimaryKey(autoGenerate = true)
     int id;
 
-    @ColumnInfo(name = "t_name")
+    @ColumnInfo(name = "name")
     String name;
 
-    @ColumnInfo(name = "description")
-    String description;
+    @ColumnInfo(name = "year")
+    Integer year;
 
-    @ColumnInfo(name = "price")
-    double price;
-
-    @ColumnInfo(name = "thumbnail")
-    String thumbnail;
-
-    @ColumnInfo(name = "chef")
-    String chef;
-
-    @ColumnInfo(name = "timestamp")
-    String timestamp;
+    @ColumnInfo(name = "color")
+    String color;
 
 
+    @ColumnInfo(name = "pantone_value")
+    String pantone;
 
     public int getId() {
         return id;
@@ -46,45 +39,27 @@ public class Recipe implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getYear() {
+        return year;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setYear(Integer year) {
+        this.year = year;
     }
 
-    public double getPrice() {
-        return price;
+    public String getColor() {
+        return color;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getThumbnail() {
-        return thumbnail;
+    public String getPantone() {
+        return pantone;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setPantone(String pantone) {
+        this.pantone = pantone;
     }
-
-    public String getChef() {
-        return chef;
-    }
-
-    public void setChef(String chef) {
-        this.chef = chef;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-
 }

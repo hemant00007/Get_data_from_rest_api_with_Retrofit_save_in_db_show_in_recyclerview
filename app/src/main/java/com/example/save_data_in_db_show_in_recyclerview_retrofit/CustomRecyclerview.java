@@ -16,9 +16,9 @@ import java.util.List;
 
 public class CustomRecyclerview extends RecyclerView.Adapter<CustomRecyclerview.ViewHolder>{
     Context context;
-    List<Repo> arrayList;
+    List<Data> arrayList;
 
-    public CustomRecyclerview(Context context, List<Repo> arrayList) {
+    public CustomRecyclerview(Context context, List<Data> arrayList) {
         this.context = context;
         this.arrayList = arrayList;
     }
@@ -33,17 +33,17 @@ public class CustomRecyclerview extends RecyclerView.Adapter<CustomRecyclerview.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Repo repo = arrayList.get(position);
+        Data repo = arrayList.get(position);
 
         holder.name.setText(repo.getName());
-        holder.chef.setText("By " + repo.getChef());
-        holder.description.setText(repo.getDescription());
-        holder.price.setText("Price: ₹" + repo.getPrice());
-        holder.timestamp.setText(repo.getTimestamp());
+        holder.chef.setText("By " + repo.getYear());
+        holder.description.setText(repo.getColor());
+        holder.price.setText("Price: ₹" + repo.getPantoneValue());
+        holder.timestamp.setText(repo.getColor());
 
-        Glide.with(context)
-                .load(repo.getThumbnail())
-                .into(holder.thumbnail);
+//        Glide.with(context)
+//                .load(repo.getThumbnail())
+//                .into(holder.thumbnail);
 
 
     }
@@ -56,7 +56,6 @@ public class CustomRecyclerview extends RecyclerView.Adapter<CustomRecyclerview.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView name, description, price, chef, timestamp;
-        public ImageView thumbnail;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -65,7 +64,6 @@ public class CustomRecyclerview extends RecyclerView.Adapter<CustomRecyclerview.
             chef = itemView.findViewById(R.id.chef);
             description = itemView.findViewById(R.id.description);
             price = itemView.findViewById(R.id.price);
-            thumbnail = itemView.findViewById(R.id.thumbnail);
             timestamp = itemView.findViewById(R.id.timestamp);
 
         }
